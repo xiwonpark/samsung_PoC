@@ -1,0 +1,61 @@
+stages:
+  - staging
+  - deploy
+  - destroy
+
+terraform init&plan:
+  stage: staging
+  variables:
+    CHANGED_FILES: "git diff --name-only $CI_MERGE_REQUEST_TARGET_BRANCH_SHA $CI_COMMIT_SHA"
+  script:
+    - echo $CI_PIPELINE_SOURCE
+    - echo $CI_COMMIT_BRANCH
+    - echo $CI_DEFAULT_BRANCH
+    - $CHANGED_FILES
+    - $CHANGED_FILES > parsing.txt
+    - echo "RUN terraform init && plan"
+    - chmod 700 script_stg.py
+    - python3 script_stg.py
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  tags:
+    - testsw
+
+terraform apply:
+  stage: deploy
+  variables:
+    CHANGED_FILES: "git diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA"
+  script:
+    - echo $CI_PIPELINE_SOURCE
+    - echo $CI_COMMIT_BRANCH
+    - echo $CI_DEFAULT_BRANCH
+    - echo $CI_COMMIT_TITLE
+    - echo $CI_COMMIT_DESCRIPTION
+    - echo $CI_COMMIT_MESSAGE
+    - echo $CI_MERGE_REQUEST_TITLE
+    - $CHANGED_FILES
+    - $CHANGED_FILES > parsing.txt
+    - echo "RUN terraform apply"
+    - chmod 700 script_prd.py
+    - python3 script_prd.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_DESCRIPTION =~ "/deploy/"
+  tags:
+    - testsw
+
+terraform_destroy:
+  stage: destroy
+  variables:
+    CHANGED_FILES: "git diff --name-only $CI_COMMIT_BEFORE_SHA $CI_COMMIT_SHA"
+  script:
+    - echo $CI_COMMIT_TITLE
+    - echo $CI_COMMIT_DESCRIPTION
+    - $CHANGED_FILES
+    - $CHANGED_FILES > parsing.txt
+    - echo "RUN terraform apply"
+    - chmod 700 script_prd.py
+    - python3 script_prd.py
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" && $CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_DESCRIPTION =~ "/destroy/"
+  tags:
+    - testsw

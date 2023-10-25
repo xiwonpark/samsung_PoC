@@ -1,0 +1,37 @@
+# 인프라스트럭처 설정
+provider "oci" {
+  tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaauqrkfl74wqvtk246iortv2zvcxpdvsimctuct66s2lcyraezgt4q"
+  user_ocid        = "ocid1.user.oc1..aaaaaaaauc7zmus35qcmqaz67kzoypouparh2kkjob72dtlllrz6t3mm2xqq"
+  fingerprint      = "75:54:6c:c7:ff:df:cb:a3:10:53:a5:57:97:f0:18:06"
+  private_key_path = "./swpark@ezcom.co.kr_2023-10-25T01_02_11.595Z.pem"
+  region           = "ap-seoul-1"
+}
+
+terraform {
+  backend "s3" {
+    bucket         = "swtf-tfstate-s3"
+    key            = "samsung-poc/OCI/terraform.tfstate"
+    region         = "ap-northeast-2"
+    encrypt        = true
+    dynamodb_table = "tfstate-lock"
+  }
+}
+
+module "oci" {
+  source        = "./project"
+  name          = "hyc-foundry"
+  foundry_01_sn = "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaqlkbjvilzjoms2jqwpyq3wbcpgsgty2kk5uyluscq4oce4nysduq"
+  compartment   = "ocid1.compartment.oc1..aaaaaaaab3ldf4ezsyp4meytyged3tpunmwh5b7jsdhrkjbbcztibbaa24da"
+  avail_domain  = "aFbt:AP-SEOUL-1-AD-1"
+
+  instance_type      = ["VM.Standard.E4.Flex", "VM.Standard2.1"]
+  D_project_ip       = [for line in split("\n", file("./DNS/D_project.txt")) : split(" ", line)[0]]
+  D_project_hostname = [for line in split("\n", file("./DNS/D_project.txt")) : split("   ", line)[1]]
+
+  ami = {
+    CentOS7 = "ocid1.image.oc1.ap-seoul-1.aaaaaaaavr3jv4gwj7rqpk64uxn4vdbr4o2327ftvtral7vv4moqmwjjobqq"
+  }
+
+  kms_vault     = "ocid1.vault.oc1.ap-seoul-1.e5stq3cvaaemi.abuwgljryk2wabfwdelk4sijyvvumjsqfpss46mrkv7nlhkhkeqelfbvfb3a"
+  kms_vault_key = "ocid1.key.oc1.ap-seoul-1.e5stq3cvaaemi.abuwgljrtk2z52cwsaerluadrzuhbawnbpklcyxpmh6kvprighrl3qwv2a4q"
+}

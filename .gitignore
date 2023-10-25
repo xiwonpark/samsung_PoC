@@ -1,0 +1,21 @@
+# default
+.DS_Store
+
+# aws 
+Aws/.terraform
+Aws/.terraform.lock.hcl
+
+# azure
+Azure/.terraform
+Azure/.terraform.lock.hcl
+Azure/.secret.tf
+
+# gcp
+GCP/.terraform
+GCP/.terraform.lock.hcl
+GCP/top-virtue-398708-68e38fe5efb8.json
+
+# oci
+OCI/.terraform
+OCI/.terraform.lock.hcl
+OCI/swpark@ezcom.co.kr_2023-10-25T01_02_11.595Z.pem
