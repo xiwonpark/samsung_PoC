@@ -19,7 +19,6 @@ terraform {
 
 module "oci" {
   source        = "./project"
-  name          = "hyc-foundry"
   foundry_01_sn = "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaqlkbjvilzjoms2jqwpyq3wbcpgsgty2kk5uyluscq4oce4nysduq"
   compartment   = "ocid1.compartment.oc1..aaaaaaaab3ldf4ezsyp4meytyged3tpunmwh5b7jsdhrkjbbcztibbaa24da"
   avail_domain  = "aFbt:AP-SEOUL-1-AD-1"
@@ -32,6 +31,8 @@ module "oci" {
     CentOS7 = "ocid1.image.oc1.ap-seoul-1.aaaaaaaavr3jv4gwj7rqpk64uxn4vdbr4o2327ftvtral7vv4moqmwjjobqq"
   }
 
+# vault 생성시 Protection Mode : HSM, Algorithm : AES 로 생성
+# vault 생성 후 root compartment의 policy에서 Allow service blockstorage to use keys in compartment [COMPARTMENT_NAME] 추가 필요
   kms_vault     = "ocid1.vault.oc1.ap-seoul-1.e5stq3cvaaemi.abuwgljryk2wabfwdelk4sijyvvumjsqfpss46mrkv7nlhkhkeqelfbvfb3a"
   kms_vault_key = "ocid1.key.oc1.ap-seoul-1.e5stq3cvaaemi.abuwgljrtk2z52cwsaerluadrzuhbawnbpklcyxpmh6kvprighrl3qwv2a4q"
 }

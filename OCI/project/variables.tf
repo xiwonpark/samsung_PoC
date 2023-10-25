@@ -1,8 +1,3 @@
-variable "name" {
-  description = "name"
-  type        = string
-}
-
 variable "foundry_01_sn" {
   description = "Foundry Subnet 01"
   type        = string
