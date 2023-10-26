@@ -1,4 +1,6 @@
-# 인프라스트럭처 설정
+# 특정 version의 provider 사용 확인 필요
+# 현재 hashicorp/oci 5.17.0 로 가지고 오고있음
+# required_provider 구문을 사용하여 version을 특정하면 oracle/oci provider와 hashicorp/oci 2개 가지고 오며 error 발생 
 provider "oci" {
   tenancy_ocid     = "ocid1.tenancy.oc1..aaaaaaaauqrkfl74wqvtk246iortv2zvcxpdvsimctuct66s2lcyraezgt4q"
   user_ocid        = "ocid1.user.oc1..aaaaaaaauc7zmus35qcmqaz67kzoypouparh2kkjob72dtlllrz6t3mm2xqq"
