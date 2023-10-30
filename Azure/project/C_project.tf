@@ -25,6 +25,8 @@ resource "azurerm_linux_virtual_machine" "C_Project" {
     disk_encryption_set_id = var.disk_encryption //os 디스크 암호화
   }
 
+  tags = var.tags
+
   user_data = filebase64("./project/bootstrap.sh") //가상머신 부팅시 실행할 사용자 지정 스크립트
 }
 
@@ -41,6 +43,8 @@ resource "azurerm_network_interface" "C_project_NIC" {
     private_ip_address_allocation = "Static" // private ip 지정 
     private_ip_address            = var.C_project_ip[count.index]
   }
+
+  tags = var.tags
 }
 
 resource "azurerm_network_interface_security_group_association" "nic_sg" {

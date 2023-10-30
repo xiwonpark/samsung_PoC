@@ -42,6 +42,6 @@ variable "image" {
 }
 
 variable "tags" {
-  description = "Memory Tags"
-  type        = map(any)
+  description = "default tags"
+  type = map(any)
 }
