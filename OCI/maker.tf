@@ -23,7 +23,7 @@ module "oci" {
   source        = "./project"
   foundry_01_sn = "ocid1.subnet.oc1.ap-seoul-1.aaaaaaaaqlkbjvilzjoms2jqwpyq3wbcpgsgty2kk5uyluscq4oce4nysduq"
   compartment   = "ocid1.compartment.oc1..aaaaaaaab3ldf4ezsyp4meytyged3tpunmwh5b7jsdhrkjbbcztibbaa24da"
-  avail_domain  = "aFbt:AP-SEOUL-1-AD-1"
+  avail_domain  = "aFbt:AP-SEOUL-1-AD-1"  
 
   instance_type      = ["VM.Standard.E4.Flex", "VM.Standard2.1"]
   D_project_ip       = [for line in split("\n", file("./DNS/D_project.txt")) : split(" ", line)[0]]

@@ -8,7 +8,8 @@ terraform {
   }
 }
 
-# label에 대문자 안 됨
+# label에 대문자, .,  @ 등 특수문자 안 됨 그런데 _,-,한글 은 됨, key는 소문자로 시작 해야 함
+# access key 지정시 export GOOGLE_APPLICATION_CREDENTIALS="FILE_PATH"
 provider "google" {
   project = "top-virtue-398708"
   region  = "asia-northeast3"
@@ -45,6 +46,6 @@ module "gcp" {
     centos79 = "TEMP"
   }
   instance_type      = ["e2-standard-2", "e2-standard-4", "e2-medium", "e2-small"]
-  G_project_ip       = [for line in split("\n", file("./project/DNS/G_project_DNS.txt")) : split(" ", line)[0]]
-  G_project_hostname = [for line in split("\n", file("./project/DNS/G_project_DNS.txt")) : trimspace(split("   ", line)[1])]
+  G_project_ip       = [for line in split("\n", file("./DNS/G_project_DNS.txt")) : split(" ", line)[0]]
+  G_project_hostname = [for line in split("\n", file("./DNS/G_project_DNS.txt")) : trimspace(split("   ", line)[1])]
 }
