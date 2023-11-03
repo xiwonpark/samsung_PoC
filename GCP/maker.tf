@@ -25,7 +25,7 @@ provider "google" {
 terraform {
   backend "s3" {
     bucket         = "swtf-tfstate-s3"
-    key            = "samsung-poc/GCP/terraform.tfstate"
+    key            = "test/gcp/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "tfstate-lock"

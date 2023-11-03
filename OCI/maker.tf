@@ -12,7 +12,7 @@ provider "oci" {
 terraform {
   backend "s3" {
     bucket         = "swtf-tfstate-s3"
-    key            = "samsung-poc/OCI/terraform.tfstate"
+    key            = "test/oci/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "tfstate-lock"
