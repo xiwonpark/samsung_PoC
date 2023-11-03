@@ -62,6 +62,13 @@ CSP별 1개의 maker.tf 파일을 가지며 해당 파일에서 backend, module(
 12 directories, 35 files
 ```
 
+### 0. file
+*.tf - terraform code
+*.txt - text file
+extract_data.py - tfstate의 특정 값을 기준으로 version 검색
+script_stg.py - CI pipeline script
+script_prd.py - CD pipeline script
+
 ### 1. tag
 provider 별 필수 기본 태그를 지정합니다.
 maker.tf 파일을 참고하세요.
