@@ -58,7 +58,7 @@ answer = input()
 
 if answer.lower() == 'yes':
     for id in values:
-        filename = f"{id}.txt"
+        filename = f"{id}"
         with open(filename, 'w') as file:
             file.write(values[id])
         print(values[id])
@@ -75,7 +75,7 @@ for id in values:
     if answer.lower() == 'exit':
         break
     elif answer.lower() == 'yes':
-        filename = f"{id}.txt"
+        filename = f"{id}"
         with open(filename, 'w') as file:
             file.write(values[id])
         print(values[id])
