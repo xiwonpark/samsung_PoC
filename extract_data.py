@@ -53,7 +53,7 @@ if counter == 0:
     exit(0)
 
 # 전체 저장
-print(f"모든 파일을 파일로 저장할까요? (yes or no)")
+print(f"모든 파일을 저장할까요? (yes or no)")
 answer = input()
 
 if answer.lower() == 'yes':
