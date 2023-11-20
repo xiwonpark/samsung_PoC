@@ -20,28 +20,64 @@ response = client.list_object_versions(
     Prefix=(f"test/{prefix}")
 )
 
-# bool 변수 선언
-found = False
+# dict 생성
+values = {}
+
+# 변수 초기화
+counter = 0
 
 # Version ID 추출 및 출력
 for version in response.get('Versions'):
     version_id = version['VersionId']
+    version_key = version['Key']
 
-    # 해당 버전의 파일 가져오기
     obj = client.get_object(
-        Bucket=bucket_name,
-        Key=version['Key'],
-        VersionId=version_id
-    )
-
-    # 파일 내용 읽기
+            Bucket=bucket_name,
+            Key=version_key,
+            VersionId=version_id
+        )
     file_contents = obj['Body'].read().decode('utf-8')
     
     # 파일 내용에서 특정 값 찾기
     if search_term in file_contents:
+        counter += 1
         print(f"Found '{search_term}' in '{prefix}' VersionID: {version_id}")
-        found = True
+        values[version_id] = file_contents
 
-# 값이 없을 경우 처리
-if not found:
-    print(f"Can't found value in '{prefix}'")
+# 특정 값을 찾았을 때 찾은 총 파일의 수
+print(f"Found {counter} files")
+
+# 특정 값을 못 찾았을 때
+if counter == 0:
+    print(f"'{search_term}' are not included in '{prefix}'")
+    exit(0)
+
+# 전체 저장
+print(f"모든 파일을 파일로 저장할까요? (yes or no)")
+answer = input()
+
+if answer.lower() == 'yes':
+    for id in values:
+        filename = f"{id}.txt"
+        with open(filename, 'w') as file:
+            file.write(values[id])
+        print(values[id])
+    print(f"모든 파일을 저장했습니다.")
+    exit(0)
+
+
+# yes일 시 파일로 저장
+for id in values:
+    print(f"VersionID: {id}를 저장할까요? (yes or no)")
+    print(f"script를 종료하고 싶다면 'exit'를 입력해주세요")
+    answer = input()
+
+    if answer.lower() == 'exit':
+        break
+    elif answer.lower() == 'yes':
+        filename = f"{id}.txt"
+        with open(filename, 'w') as file:
+            file.write(values[id])
+        print(values[id])
+        print(f"파일 '{filename}'를 저장했습니다.")
+
