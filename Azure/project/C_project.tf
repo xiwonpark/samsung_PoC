@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "C_Project" {
 
   tags = var.tags
 
-  user_data = filebase64("./project/bootstrap.sh") //가상머신 부팅시 실행할 사용자 지정 스크립트
+  custom_data = filebase64("project/bootstrap.sh") //가상머신 부팅시 실행할 사용자 지정 스크립트
 }
 
 resource "azurerm_network_interface" "C_project_NIC" {
