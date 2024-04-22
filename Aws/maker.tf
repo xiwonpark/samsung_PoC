@@ -24,8 +24,8 @@ provider "aws" {
 # backend 설정
 terraform {
   backend "s3" {
-    bucket         = "swtf-tfstate-s3"
-    key            = "test/aws/terraform.tfstate"
+    bucket         = "swtf-backend"
+    key            = "aws/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "tfstate-lock"
@@ -35,10 +35,10 @@ terraform {
 # module 선언
 module "aws" {
   source        = "./project"
-  memory_01_sn  = "subnet-0eb3b82b678c8e550"
-  memory_02_sn  = "subnet-046e1f87f44468849"
-  foundry_01_sn = "subnet-0a5d20c1144da3c62"
-  sg            = "sg-09292891d5ecc93d7"
+  memory_01_sn  = "subnet-06720de8222957581" #pb-sn-01
+  memory_02_sn  = "subnet-0dd1cef9ea0d7e29c" #pv-sn-01
+  foundry_01_sn = "subnet-070c2cdfa6e9b6a93" #pv-sn-02
+  sg            = "sg-0dc31a0fae01058c6" #sw-sg
 
   instance_type = ["t3.micro", "t3.medium", "t3.large", "t3.xlarge"]
 
@@ -51,4 +51,6 @@ module "aws" {
     RHEL79 = "ami-09e2a570cb404b37e"
     RHEL83 = "ami-02ab944d7e31b1074"
   }
+
+  kms_key_id = "arn:aws:kms:ap-northeast-2:644631683002:key/8ddf9d21-721b-43c0-9fb9-11f7ee5aec37"
 }

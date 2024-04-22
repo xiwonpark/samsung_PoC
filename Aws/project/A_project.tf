@@ -1,5 +1,5 @@
 resource "aws_instance" "A_Project" {
-  ami   = lookup("${var.ami}", "RHEL79")
+  ami   = lookup(var.ami, "RHEL79")
   count = length(var.A_project_ip)
 
   vpc_security_group_ids  = ["${var.sg}"]
@@ -11,7 +11,7 @@ resource "aws_instance" "A_Project" {
 # CMK로 ebs 암호화
   root_block_device {
     encrypted  = true
-    kms_key_id = "arn:aws:kms:ap-northeast-2:644631683002:key/83a65b62-b1b9-40ae-9d6c-2a25a839bb02"
+    kms_key_id = var.kms_key_id
     tags = {
       Name = "${var.A_project_hostname[count.index]}-vol"
     }
