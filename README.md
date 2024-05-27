@@ -12,54 +12,58 @@ CSP별 1개의 maker.tf 파일을 가지며 해당 파일에서 backend, module(
 ```
 .
 ├── Aws
-│   ├── DNS
-│   │   ├── A_project_DNS.txt
-│   │   └── B_project_DNS.txt
-│   ├── maker.tf
-│   ├── output.tf
-│   └── project
-│       ├── A_project.tf
-│       ├── B_project.tf
-│       ├── output.tf
-│       └── variables.tf
+│   ├── DNS
+│   │   ├── A_project_DNS.txt
+│   │   └── B_project_DNS.txt
+│   ├── README.md
+│   ├── maker.tf
+│   ├── output.tf
+│   └── project
+│       ├── A_project.tf
+│       ├── B_project.tf
+│       ├── output.tf
+│       └── variables.tf
 ├── Azure
-│   ├── DNS
-│   │   └── C_project_DNS.txt
-│   ├── maker.tf
-│   ├── output.tf
-│   ├── project
-│   │   ├── C_project.tf
-│   │   ├── bootstrap.sh
-│   │   ├── output.tf
-│   │   └── variables.tf
-│   └── secret.tf
+│   ├── DNS
+│   │   └── C_project_DNS.txt
+│   ├── README.md
+│   ├── maker.tf
+│   ├── output.tf
+│   ├── project
+│   │   ├── C_project.tf
+│   │   ├── bootstrap.sh
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   └── secret.tf
 ├── GCP
-│   ├── DNS
-│   │   └── G_project_DNS.txt
-│   ├── maker.tf
-│   ├── output.tf
-│   ├── project
-│   │   ├── G_project.tf
-│   │   ├── output.tf
-│   │   └── variables.tf
-│   └── top-virtue-398708-68e38fe5efb8.json
+│   ├── DNS
+│   │   └── G_project_DNS.txt
+│   ├── README.md
+│   ├── maker.tf
+│   ├── output.tf
+│   ├── project
+│   │   ├── G_project.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   └── top-virtue-398708-68e38fe5efb8.json
 ├── OCI
-│   ├── DNS
-│   │   └── D_project.txt
-│   ├── maker.tf
-│   ├── output.tf
-│   ├── project
-│   │   ├── D_project.tf
-│   │   ├── output.tf
-│   │   └── variables.tf
-│   └── swpark@ezcom.co.kr_2023-10-25T01_02_11.595Z.pem
+│   ├── DNS
+│   │   └── D_project.txt
+│   ├── README.md
+│   ├── maker.tf
+│   ├── output.tf
+│   ├── project
+│   │   ├── D_project.tf
+│   │   ├── output.tf
+│   │   └── variables.tf
+│   └── swpark@ezcom.co.kr_2023-10-25T01_02_11.595Z.pem
 ├── README.md
 ├── extract_data.py
 ├── parsing.txt
 ├── script_prd.py
 └── script_stg.py
 
-12 directories, 35 files
+12 directories, 39 files
 ```
 
 ### 1. tag
