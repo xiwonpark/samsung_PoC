@@ -4,10 +4,10 @@ import boto3
 client = boto3.client('s3')
 
 # Version을 나열할 버킷 이름 및 프리픽스 지정, 찾을 특정 값 지정
-bucket_name = "swtf-tfstate-s3"
+bucket_name = "swtf-backend"
 print(f"============================================================================")
 print("Backend tfstate file에서 특정 값을 찾겠습니다.\n인자 값을 적어주세요.")
-print("\nBucket Name = swtf-tfstate-s3")
+print("\nBucket Name = swtf-backend")
 print("\nCSP를 적어주세요(aws,azure,gcp,oci): ")
 prefix = input()
 print("\n찾을 값을 적어주세요: ")
@@ -17,7 +17,7 @@ print(f"========================================================================
 # Version 정보 가져오기
 response = client.list_object_versions(
     Bucket=bucket_name,
-    Prefix=(f"test/{prefix}")
+    Prefix=(f"{prefix}")
 )
 
 # dict 생성

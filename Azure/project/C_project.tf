@@ -4,7 +4,7 @@ resource "azurerm_linux_virtual_machine" "C_Project" {
   name                  = var.C_project_hostname[count.index]
   location              = var.location_kc
   resource_group_name   = var.poc_rg
-  size                  = var.vm_size[0]
+  size                  = var.vm_size[2]
   network_interface_ids = [azurerm_network_interface.C_project_NIC[count.index].id]
   source_image_id       = lookup(var.image, "RHEL79") //가상머신 생성시 사용할 이미지 지정
   plan {

@@ -21,8 +21,8 @@ provider "azurerm" {
 # backend 설정
 terraform {
   backend "s3" {
-    bucket         = "swtf-tfstate-s3"
-    key            = "test/azure/terraform.tfstate"
+    bucket         = "swtf-backend"
+    key            = "azure/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
     dynamodb_table = "tfstate-lock"
@@ -38,7 +38,7 @@ module "azure" {
   nsg             = "/subscriptions/5e22e437-d178-4e96-b21e-2a21eaac3e1f/resourceGroups/samsung_poc_rg/providers/Microsoft.Network/networkSecurityGroups/test-nsg"
   disk_encryption = "/subscriptions/5e22e437-d178-4e96-b21e-2a21eaac3e1f/resourceGroups/samsung_poc_rg/providers/Microsoft.Compute/diskEncryptionSets/test"
 
-  vm_size = ["Standard_B1s", "Standard_B2s"]
+  vm_size = ["Standard_B1s", "Standard_B2s", "Standard_DS1_v2"]
 
   C_project_ip       = [for line in split("\n", file("./DNS/C_project_DNS.txt")) : split(" ", line)[0]]
   C_project_hostname = [for line in split("\n", file("./DNS/C_project_DNS.txt")) : split("   ", line)[1]]
