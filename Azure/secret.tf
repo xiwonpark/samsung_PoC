@@ -21,3 +21,8 @@ variable "client_secret" {
   default = "Yeq8Q~u3eq9QmQAT3_Bq~l~Mb~mQVN9fz43vibQ1"
   type    = string
 }
+
+variable "admin_password" {
+  default = "AzureTest2023!!"
+  type = string
+}

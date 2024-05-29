@@ -48,10 +48,12 @@ module "azure" {
     RHEL83 = "TEMP"
   }
 
+  admin_password = var.admin_password
+  
   tags = {
     ManagedByTerraform = "true"
     Creator            = "Siwon"
-    Email              = "swpark@ezcom.co.kr"
+    Email              = "swpark@ezcom.co.kr" 
     project            = "TF PoC"
   }
 }

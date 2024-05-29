@@ -15,7 +15,7 @@ resource "azurerm_linux_virtual_machine" "C_Project" {
 
   disable_password_authentication = false //비밀번호 인증 비활성화
   admin_username                  = "ezadmin"
-  admin_password                  = "AzureTest2023!!"
+  admin_password                  = var.admin_password
 
   os_disk {
     name                 = "${var.C_project_hostname[count.index]}-osdisk"

@@ -45,3 +45,7 @@ variable "tags" {
   description = "default tags"
   type = map(any)
 }
+
+variable "admin_password" {
+  type = string
+}
